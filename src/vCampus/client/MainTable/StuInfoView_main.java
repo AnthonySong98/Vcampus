@@ -9,6 +9,7 @@ package vCampus.client.MainTable;
 
 import javax.swing.*;
 
+import vCampus.client.register.LoginView;
 import vCampus.client.register.RegisterView;
 import vCampus.client.InfoView.*;
 import vCampus.client.JWC.*;
@@ -25,7 +26,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class StuInfoView_main extends JPanel{
-	JFrame frame = new JFrame("教师信息");
+	JFrame frame = new JFrame("个人信息");
 	BackgroundPanel bgp;
 	
 	
@@ -209,7 +210,7 @@ public class StuInfoView_main extends JPanel{
 		jb8.setIcon(new ImageIcon("img\\宿舍.png"));
 	}
 	
-
+	
 	public static void main(String[] args) {  
 		StuInfoView_main SIV=new StuInfoView_main();  
     }
