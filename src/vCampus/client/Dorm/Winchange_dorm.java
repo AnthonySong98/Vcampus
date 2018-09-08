@@ -13,7 +13,10 @@ import vCampus.vo.Teacher;
 
 
 /**
- * @author Yanhao Shen
+ * @author Yanhao Shen,CC
+ * 
+ * @v1.1 date 9/8
+ * 	add front-end monitor
  *
  */
 public class Winchange_dorm extends JPanel {

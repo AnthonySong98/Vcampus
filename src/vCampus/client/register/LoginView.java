@@ -23,12 +23,15 @@ import vCampus.client.biz.TeacherServiceImpl;
 import vCampus.client.biz.AdminService;
 import vCampus.client.biz.AdminServiceImpl;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -39,6 +42,7 @@ public class LoginView extends JFrame{
 	public JTextField usernameText = new JTextField(15);
 	public JTextField pwdhintText = new JTextField(15);
 	public JPasswordField pwdText = new JPasswordField(15);
+	boolean pwdisFocused = false;
 	public JButton jb1 = new JButton();
 	public JButton jb2 = new JButton();
 	public JButton jb_close = new JButton();
@@ -60,6 +64,7 @@ public class LoginView extends JFrame{
 	    Font font=new Font("苹方 常规",Font.CENTER_BASELINE,28);
 	    Font font1=new Font("苹方 常规",Font.LAYOUT_LEFT_TO_RIGHT,20);
 	    this.add(usernameText);
+	    this.add(pwdhintText);
 	    this.add(pwdText);
 	    this.setFocusable(true);
 	    this.add(jb1);
@@ -79,11 +84,77 @@ public class LoginView extends JFrame{
 	    usernameText.setFont(font);
 	    usernameText.setBorder(null);
 	    usernameText.addFocusListener(new JTextFieldHintListener(usernameText, "用户ID"));
- 
+	    
+	    pwdhintText.setBounds(750, 655, 425, 43);
+	    pwdhintText.setFont(font);
+	    pwdhintText.setBorder(null);
+	    pwdhintText.setForeground(Color.GRAY);
+	    pwdhintText.setText("密码");
+	    pwdhintText.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				//鼠标点击时，隐藏文本框,显示密码框，密码框获取焦点		
+				String temp = pwdhintText.getText();
+				String hintText = "密码";
+				if(temp.equals(hintText)) {
+					pwdhintText.setVisible(false);
+					pwdText.setVisible(true);
+					pwdText.requestFocus();
+				}
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+	    	
+	    });
+	    
 	    pwdText.setBounds(750, 655, 425, 43);
 	    pwdText.setFont(font);
 	    pwdText.setBorder(null);
-	    pwdText.addFocusListener(new JTextFieldHintListener(pwdText, "******"));
+	    pwdText.addFocusListener(new FocusListener() {
+
+			@Override
+			public void focusGained(FocusEvent e) {
+				// TODO Auto-generated method stub
+				pwdisFocused = true;
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				// TODO Auto-generated method stub
+				pwdisFocused = false;
+				//失去焦点时，密码框没有输入内容且焦点不在密码框上，显示文本框
+				String temp = pwdText.getText().trim();
+				if(temp.equals("") && pwdisFocused == false) {
+					pwdhintText.setVisible(true);
+					pwdhintText.setText("密码");
+					pwdText.setVisible(false);
+				}
+			}
+	    });
 	    
 	    
 	    jrb1.setBounds(753, 718, 30, 30);
@@ -235,6 +306,8 @@ public class LoginView extends JFrame{
 	    this.setResizable(true);
 	}
 	
+
+	
 	public void refresh() {
 		jrb1.setIcon(new ImageIcon("img\\jrb未选中.png"));
 		jrb2.setIcon(new ImageIcon("img\\jrb未选中.png"));
@@ -242,6 +315,7 @@ public class LoginView extends JFrame{
 	}
 	
 	public void LToff() {
+		this.dispose();
 		this.setVisible(false);
 	}
 	
