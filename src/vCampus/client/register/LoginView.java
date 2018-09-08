@@ -58,6 +58,7 @@ public class LoginView extends JFrame{
 		this.setSize(1920,1080);         
 	    this.setLocation(0, 0);
 	    Font font=new Font("苹方 常规",Font.CENTER_BASELINE,28);
+	    Font font1=new Font("苹方 常规",Font.LAYOUT_LEFT_TO_RIGHT,20);
 	    this.add(usernameText);
 	    this.add(pwdText);
 	    this.setFocusable(true);
@@ -74,42 +75,60 @@ public class LoginView extends JFrame{
 	    bg.add(jrb2);
 	    bg.add(jrb3);
 	    
-	    usernameText.setBounds(750, 560, 425, 48);
+	    usernameText.setBounds(750, 560, 425, 43);
 	    usernameText.setFont(font);
 	    usernameText.setBorder(null);
 	    usernameText.addFocusListener(new JTextFieldHintListener(usernameText, "用户ID"));
  
-	    pwdText.setBounds(750, 655, 425, 48);
+	    pwdText.setBounds(750, 655, 425, 43);
 	    pwdText.setFont(font);
 	    pwdText.setBorder(null);
 	    pwdText.addFocusListener(new JTextFieldHintListener(pwdText, "******"));
 	    
-	    stuLab.setBounds(753, 718, 80, 30);
-	    jrb1.setBounds(800, 718, 30, 30);
+	    
+	    jrb1.setBounds(753, 718, 30, 30);
 	    jrb1.setSelected(true);
+	    jrb1.setContentAreaFilled(false);
+	    jrb1.setIcon(new ImageIcon("img\\jrb选中.png"));//jrb1默认选中
 	    jrb1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				identity = 0;
+				refresh();
+				jrb1.setIcon(new ImageIcon("img\\jrb选中.png"));
 			}
 	    	
 	    });
-	    teaLab.setBounds(850, 718, 80, 30);
-	    jrb2.setBounds(900, 718, 30, 30);
+	    stuLab.setBounds(790, 718, 80, 30);
+	    stuLab.setFont(font1);
+	    
+	    jrb2.setBounds(920, 718, 30, 30);
+	    jrb2.setContentAreaFilled(false);
+	    jrb2.setIcon(new ImageIcon("img\\jrb未选中.png"));
 	    jrb2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				identity = 1;
+				refresh();
+				jrb2.setIcon(new ImageIcon("img\\jrb选中.png"));
 			}
 	    	
 	    });
-	    admLab.setBounds(950,718,80,30);
-	    jrb3.setBounds(1000, 718, 30, 30);
+	    teaLab.setBounds(950, 718, 80, 30);
+	    teaLab.setFont(font1);
+	    
+
+	    jrb3.setBounds(1080, 718, 30, 30);
+	    jrb3.setContentAreaFilled(false);
+	    jrb3.setIcon(new ImageIcon("img\\jrb未选中.png"));
 	    jrb3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				identity = 2;
+				refresh();
+				jrb3.setIcon(new ImageIcon("img\\jrb选中.png"));
 			}
 	    	
 	    });
-	    
+	    admLab.setBounds(1110,718,80,30);
+	    admLab.setFont(font1);
 	    
 	    jb_close.setBounds(1920-50, 20, 50, 50);
 	    jb_close.setIcon(new ImageIcon("img\\exit_idle.png"));
@@ -214,6 +233,12 @@ public class LoginView extends JFrame{
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
 	    this.setVisible(true);  
 	    this.setResizable(true);
+	}
+	
+	public void refresh() {
+		jrb1.setIcon(new ImageIcon("img\\jrb未选中.png"));
+		jrb2.setIcon(new ImageIcon("img\\jrb未选中.png"));
+		jrb3.setIcon(new ImageIcon("img\\jrb未选中.png"));
 	}
 	
 	public void LToff() {
