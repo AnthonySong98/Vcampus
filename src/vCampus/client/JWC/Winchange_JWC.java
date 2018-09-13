@@ -55,7 +55,10 @@ public class Winchange_JWC extends JPanel {
 		JFrame frame=new JFrame("");
 		
 		AcademicAffairsService AAS= new AcademicAffairsServiceImpl(1, stu.getCacheStudent().getUserName());
-		index=AAS.studentGetAllCourses().size();
+		if(AAS.studentGetAllCourses()!=null) {
+			index=AAS.studentGetAllCourses().size();
+		}
+		else index = 0;
 		
 	    CardLayout card=new CardLayout();
 		JPanel cardpanel=new JPanel();
@@ -71,7 +74,7 @@ public class Winchange_JWC extends JPanel {
 	    
 		
         
-    	if(AAS.studentGetAllCourses()==null) {
+    	if(AAS.studentGetAllCourses()!=null) {
     		num = AAS.studentGetAllCourses().size();
     	}
     	ArrayList<Thread> tv = new ArrayList<Thread>(num); 	
